@@ -1,5 +1,9 @@
 package entities;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
+
+@XmlRootElement(name = "module")
 public class Module {
     private String matricule;
     private String nom;
@@ -81,5 +85,21 @@ public class Module {
         this.uniteEnseignement = uniteEnseignement;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Module module = (Module) o;
+        return coefficient == module.coefficient &&
+                volumeHoraire == module.volumeHoraire &&
+                Objects.equals(matricule, module.matricule) &&
+                Objects.equals(nom, module.nom) &&
+                type == module.type &&
+                Objects.equals(uniteEnseignement, module.uniteEnseignement);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(matricule, nom, coefficient, volumeHoraire, type, uniteEnseignement);
+    }
 }

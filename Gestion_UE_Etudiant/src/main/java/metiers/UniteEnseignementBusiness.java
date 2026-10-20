@@ -9,7 +9,7 @@ import java.util.List;
 public class UniteEnseignementBusiness {
     private static List<UniteEnseignement> unitesEnseignement;
 
-    public UniteEnseignementBusiness() {
+    static {
         unitesEnseignement = new ArrayList<UniteEnseignement>();
         // Initialisation avec quelques exemples
         unitesEnseignement.add(new UniteEnseignement(1, "Informatique", "Mme Maroua Douiri", 6, 1));
@@ -17,6 +17,9 @@ public class UniteEnseignementBusiness {
         unitesEnseignement.add(new UniteEnseignement(3, "Physique", "Mme Sarra Abidi", 4, 2));
         unitesEnseignement.add(new UniteEnseignement(4, "Infographie", "Mme Oumeima Ibnelfkih", 3, 1));
         unitesEnseignement.add(new UniteEnseignement(5, "Chimie", "M. Mohamed Amine Chebbi", 4, 2));
+    }
+
+    public UniteEnseignementBusiness() {
     }
 
     public UniteEnseignement getUEByCode(int code) {
@@ -28,13 +31,16 @@ public class UniteEnseignementBusiness {
     }
 
     public boolean addUniteEnseignement(UniteEnseignement ue) {
+        if (ue == null) {
+            return false;
+        }
         return unitesEnseignement.add(ue);
     }
 
     public List<UniteEnseignement> getUEByDomaine(String domaine) {
         List<UniteEnseignement> liste = new ArrayList<UniteEnseignement>();
         for (UniteEnseignement ue : unitesEnseignement) {
-            if (ue.getDomaine().equalsIgnoreCase(domaine))
+            if (ue.getDomaine() != null && ue.getDomaine().equalsIgnoreCase(domaine))
                 liste.add(ue);
         }
         return liste;
@@ -62,6 +68,9 @@ public class UniteEnseignementBusiness {
     }
 
     public boolean updateUniteEnseignement(int code, UniteEnseignement updatedUE) {
+        if (updatedUE == null) {
+            return false;
+        }
         int index = -1;
         for (int i = 0; i < unitesEnseignement.size(); i++) {
             if (unitesEnseignement.get(i).getCode() == code) {
@@ -71,6 +80,9 @@ public class UniteEnseignementBusiness {
         }
 
         if (index != -1) {
+            if (updatedUE.getCode() == 0) {
+                updatedUE.setCode(code);
+            }
             unitesEnseignement.set(index, updatedUE);
             return true;
         } else {
@@ -83,6 +95,6 @@ public class UniteEnseignementBusiness {
     }
 
     public void setUnitesEnseignement(List<UniteEnseignement> unitesEnseignement) {
-        this.unitesEnseignement = unitesEnseignement;
+        UniteEnseignementBusiness.unitesEnseignement = unitesEnseignement;
     }
 }

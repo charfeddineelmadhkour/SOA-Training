@@ -28,6 +28,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
+        this.requestContext = requestContext;
 
         System.out.println("request filter invoked...");
 
