@@ -90,16 +90,11 @@ public class Module {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Module module = (Module) o;
-        return coefficient == module.coefficient &&
-                volumeHoraire == module.volumeHoraire &&
-                Objects.equals(matricule, module.matricule) &&
-                Objects.equals(nom, module.nom) &&
-                type == module.type &&
-                Objects.equals(uniteEnseignement, module.uniteEnseignement);
+        return Objects.equals(matricule, module.matricule);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matricule, nom, coefficient, volumeHoraire, type, uniteEnseignement);
+        return Objects.hash(matricule);
     }
 }

@@ -46,10 +46,10 @@ public class UniteEnsRestApi {
                 .build();
     }
 
-    @Path("/{id}")
+    @Path("/{code}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUEById(@PathParam("id") int code) {
+    public Response getUEById(@PathParam("code") int code) {
         UniteEnseignement ue = helper.getUEByCode(code);
         if (ue != null) {
             return Response.status(Response.Status.OK).entity(ue).build();
@@ -82,10 +82,10 @@ public class UniteEnsRestApi {
         return createUe(ue);
     }
 
-    @Path("/{id}")
+    @Path("/{code}")
     @DELETE
     @Produces(MediaType.TEXT_PLAIN)
-    public Response deleteUe(@PathParam("id") int code) {
+    public Response deleteUe(@PathParam("code") int code) {
         if (helper.deleteUniteEnseignement(code)) {
             return Response.status(Response.Status.OK)
                     .entity("Unité d'enseignement supprimée avec succès.")
@@ -96,18 +96,18 @@ public class UniteEnsRestApi {
                 .build();
     }
 
-    @Path("/delete/{id}")
+    @Path("/delete/{code}")
     @DELETE
     @Produces(MediaType.TEXT_PLAIN)
-    public Response deleteUeAlt(@PathParam("id") int code) {
+    public Response deleteUeAlt(@PathParam("code") int code) {
         return deleteUe(code);
     }
 
-    @Path("/{id}")
+    @Path("/{code}")
     @PUT
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces(MediaType.TEXT_PLAIN)
-    public Response updateUe(@PathParam("id") int code, UniteEnseignement ue) {
+    public Response updateUe(@PathParam("code") int code, UniteEnseignement ue) {
         if (helper.updateUniteEnseignement(code, ue)) {
             return Response.status(Response.Status.OK)
                     .entity("Unité d'enseignement modifiée avec succès.")
@@ -118,11 +118,11 @@ public class UniteEnsRestApi {
                 .build();
     }
 
-    @Path("/update/{id}")
+    @Path("/update/{code}")
     @PUT
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces(MediaType.TEXT_PLAIN)
-    public Response updateUeAlt(@PathParam("id") int code, UniteEnseignement ue) {
+    public Response updateUeAlt(@PathParam("code") int code, UniteEnseignement ue) {
         return updateUe(code, ue);
     }
 }
